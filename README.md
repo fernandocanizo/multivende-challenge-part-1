@@ -3,14 +3,14 @@
 ## Parte I: Lógica
 
 1. Operaciones con el archivo `persons.json`:
-    • Identificar las personas que no contengan el campo "address" y clonarlos en un nuevo arreglo.
-    • Ordenar este nuevo arreglo de forma ascendente por el campo "name" y mostrarlo a través de una interfaz web (sin usar el método sort).
-    • Mostrar las personas que tengan una edad entre 20 y 30 años y cuyo nombre empiece por "H" o "L".
+    a. Identificar las personas que no contengan el campo "address" y clonarlos en un nuevo arreglo.
+    b. Ordenar este nuevo arreglo de forma ascendente por el campo "name" y mostrarlo a través de una interfaz web (sin usar el método sort).
+    c. Mostrar las personas que tengan una edad entre 20 y 30 años y cuyo nombre empiece por "H" o "L".
 
 2. Operaciones con el archivo `emails.json`:
-    • Dado el arreglo de emails, identificar a qué personas se les puede enviar un email.
-    • Identificar qué emails no tienen asociada una persona.
-    • Identificar qué emails no son válidos.
+    a. Dado el arreglo de emails, identificar a qué personas se les puede enviar un email.
+    b. Identificar qué emails no tienen asociada una persona.
+    c. Identificar qué emails no son válidos.
 
 3. Crear Modelo entidad relación, respecto del siguiente enunciado:
 
