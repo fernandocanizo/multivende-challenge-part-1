@@ -52,7 +52,7 @@ const searchPerson = ({ ageStart = 20, ageEnd = 30, nameStartsWith = ['h', 'l'] 
 
 const decimal = n => parseInt(n, 10)
 
-const invalidEmails = () => {
+const emailStatus = ({ returnValid = true } = {}) => {
   const emailList = require('../emails.json')
   const validator = new fv({ haltOnFirstError: true });
 
@@ -63,8 +63,15 @@ const invalidEmails = () => {
   const check = validator.compile(schema);
 
   const invalidList = emailList.filter(email => check({ email }) !== true)
+  if (returnValid) {
+    return emailList.filter(email => ! invalidList.includes(email))
+  }
+
   return invalidList
 }
+
+const invalidEmails = () => emailStatus({ returnValid: false })
+const validEmails = () => emailStatus()
 
 module.exports = {
   getNoAddressPersonList,
@@ -72,4 +79,5 @@ module.exports = {
   searchPerson,
   decimal,
   invalidEmails,
+  validEmails,
 }
