@@ -32,9 +32,9 @@ Cada producto tiene un:
 Un cliente puede comprar varios productos a la empresa, y un mismo producto puede ser comprado por varios clientes. Además, las compras pueden agrupar sus productos en diferentes despachos con fechas programadas.
 
 Se desea conocer:
-- el monto por producto
-- el monto total de la compra
-- el monto del despacho
-- la fecha en que se realizó la compra
-- los productos involucrados
-- el cliente asociado a cada compra
+a. el monto por producto
+b. el monto total de la compra
+c. el monto del despacho
+d. la fecha en que se realizó la compra
+e. los productos involucrados
+f. el cliente asociado a cada compra
