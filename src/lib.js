@@ -49,8 +49,11 @@ const searchPerson = ({ ageStart = 20, ageEnd = 30, nameStartsWith = ['h', 'l'] 
   )
 }
 
+const decimal = n => parseInt(n, 10)
+
 module.exports = {
   getNoAddressPersonList,
   qsortPersonsByName,
   searchPerson,
+  decimal,
 }

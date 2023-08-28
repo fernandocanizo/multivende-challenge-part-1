@@ -1,6 +1,8 @@
 const express = require('express')
 const httpLogger = require('morgan')
 
+const controller = require('./controller')
+
 const { getNoAddressPersonList, qsortPersonsByName } = require('./lib')
 
 const app = express()
@@ -15,6 +17,8 @@ app.get('/ping', (_, res) => {
 app.get('/no-address-person', (_, res) => {
   return res.json(qsortPersonsByName(getNoAddressPersonList()))
 })
+
+app.get('/search/person/', controller.searchPerson)
 
 app.listen(port, () => {
   console.log(`Listening on localhost, port ${port}`)
