@@ -70,14 +70,23 @@ const emailStatus = ({ returnValid = true } = {}) => {
   return invalidList
 }
 
-const invalidEmails = () => emailStatus({ returnValid: false })
-const validEmails = () => emailStatus()
+const getInvalidEmails = () => emailStatus({ returnValid: false })
+const getValidEmails = () => emailStatus()
+
+const findEmailablePersons = () => {
+  const personList = require('../persons.json')
+
+  const validEmails = getValidEmails()
+
+  return personList.filter(person => validEmails.includes(person.email))
+}
 
 module.exports = {
   getNoAddressPersonList,
   qsortPersonsByName,
   searchPerson,
   decimal,
-  invalidEmails,
-  validEmails,
+  getInvalidEmails,
+  getValidEmails,
+  findEmailablePersons,
 }
