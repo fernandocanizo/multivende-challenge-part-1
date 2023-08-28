@@ -8,6 +8,9 @@ dependencies:
   express:
     specifier: ^4.18.2
     version: 4.18.2
+  fastest-validator:
+    specifier: ^1.17.0
+    version: 1.17.0
   morgan:
     specifier: ^1.10.0
     version: 1.10.0
@@ -231,6 +234,10 @@ packages:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /fastest-validator@1.17.0:
+    resolution: {integrity: sha512-37U/JDP72QSFqcvNnO81f0Aeu9og+5I3mc55b2v2RbV0S2I7KvQEdBtrFeIvaYVgam1bDUgy9F9AK9HolByogA==}
     dev: false
 
   /fill-range@7.0.1:
