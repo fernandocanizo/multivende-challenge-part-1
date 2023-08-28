@@ -81,6 +81,15 @@ const findEmailablePersons = () => {
   return personList.filter(person => validEmails.includes(person.email))
 }
 
+const emailsWithoutPerson = () => {
+  const personList = require('../persons.json')
+
+  const emailsFromPersons = personList.map(person => person.email)
+  const validEmails = getValidEmails()
+
+  return validEmails.filter(email => ! emailsFromPersons.includes(email))
+}
+
 module.exports = {
   getNoAddressPersonList,
   qsortPersonsByName,
@@ -89,4 +98,5 @@ module.exports = {
   getInvalidEmails,
   getValidEmails,
   findEmailablePersons,
+  emailsWithoutPerson,
 }
