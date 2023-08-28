@@ -1,3 +1,4 @@
+const fv = require('fastest-validator')
 
 const getNoAddressPersonList = () => {
   const personList = require('../persons.json')
@@ -51,9 +52,24 @@ const searchPerson = ({ ageStart = 20, ageEnd = 30, nameStartsWith = ['h', 'l'] 
 
 const decimal = n => parseInt(n, 10)
 
+const invalidEmails = () => {
+  const emailList = require('../emails.json')
+  const validator = new fv({ haltOnFirstError: true });
+
+  const schema = {
+    email: { type: "email" }
+  }
+
+  const check = validator.compile(schema);
+
+  const invalidList = emailList.filter(email => check({ email }) !== true)
+  return invalidList
+}
+
 module.exports = {
   getNoAddressPersonList,
   qsortPersonsByName,
   searchPerson,
   decimal,
+  invalidEmails,
 }
