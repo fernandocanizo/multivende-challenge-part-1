@@ -36,7 +36,21 @@ const qsortPersonsByName = (personList) => {
   return [...qsortPersonsByName(left), pivot, ...qsortPersonsByName(rigth)]
 }
 
+const checkStarters = (starterCharacters, strToVerify) =>
+  starterCharacters.some(schar => strToVerify.startsWith(schar))
+
+const searchPerson = ({ ageStart = 20, ageEnd = 30, nameStartsWith = ['h', 'l'] } = {}) => {
+  const personList = require('../persons.json')
+
+  return personList.filter(person =>
+    person.age >= ageStart &&
+    person.age <= ageEnd &&
+    checkStarters(nameStartsWith, person.name.toLowerCase())
+  )
+}
+
 module.exports = {
   getNoAddressPersonList,
   qsortPersonsByName,
+  searchPerson,
 }
