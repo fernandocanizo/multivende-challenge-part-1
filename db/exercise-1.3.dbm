@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.5" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="6"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="flc"
+ superuser="true"
+ createdb="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<database name="multivende" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
+	<role name="flc"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<sequence name="client_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="flc"/>
+</sequence>
+
+<table name="client" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="flc"/>
+	<position x="60" y="60"/>
+	<column name="id" not-null="true" sequence="public.client_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="first_names" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="last_names" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="dni" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="address">
+		<type name="text" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="birth_date">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="client_pkey" type="pk-constr" table="public.client">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="client_email_key" type="uq-constr" table="public.client">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="product_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="flc"/>
+</sequence>
+
+<table name="product" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="flc"/>
+	<position x="380" y="60"/>
+	<column name="id" not-null="true" sequence="public.product_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="price" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="product_pkey" type="pk-constr" table="public.product">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="product_code_key" type="uq-constr" table="public.product">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="purchase_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="flc"/>
+</sequence>
+
+<table name="purchase" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="flc"/>
+	<position x="740" y="60"/>
+	<column name="id" not-null="true" sequence="public.purchase_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="invoice" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="purchase_date" not-null="true" default-value="now()">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="purchase_pkey" type="pk-constr" table="public.purchase">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="dispatch_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="public"/>
+	<role name="flc"/>
+</sequence>
+
+<table name="dispatch" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="flc"/>
+	<position x="1060" y="60"/>
+	<column name="id" not-null="true" sequence="public.dispatch_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="wanted_delivery_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="delivery_date" default-value="(now() + '7 days'::interval)">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="dispatch_pkey" type="pk-constr" table="public.dispatch">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="rel_client_product" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="flc"/>
+	<position x="860" y="320"/>
+	<column name="fk_client_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="fk_product_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="fk_purchase_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="fk_dispatch_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="quantity" not-null="true" default-value="1">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="rel_client_product_pkey" type="pk-constr" table="public.rel_client_product">
+		<columns names="fk_client_id,fk_product_id,fk_purchase_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="rel_client_product_fk_client_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.client" table="public.rel_client_product">
+	<columns names="fk_client_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="rel_client_product_fk_product_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.product" table="public.rel_client_product">
+	<columns names="fk_product_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="rel_client_product_fk_purchase_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.purchase" table="public.rel_client_product">
+	<columns names="fk_purchase_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="rel_client_product_fk_dispatch_id_fkey" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.dispatch" table="public.rel_client_product">
+	<columns names="fk_dispatch_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_rel_client_product_client" type="relfk" layers="0"
+	 custom-color="#9cb8f5"
+	 src-table="public.rel_client_product"
+	 dst-table="public.client" reference-fk="rel_client_product_fk_client_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_rel_client_product_product" type="relfk" layers="0"
+	 custom-color="#e0c4f3"
+	 src-table="public.rel_client_product"
+	 dst-table="public.product" reference-fk="rel_client_product_fk_product_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_rel_client_product_purchase" type="relfk" layers="0"
+	 custom-color="#36dce2"
+	 src-table="public.rel_client_product"
+	 dst-table="public.purchase" reference-fk="rel_client_product_fk_purchase_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_rel_client_product_dispatch" type="relfk" layers="0"
+	 custom-color="#8baaa7"
+	 src-table="public.rel_client_product"
+	 dst-table="public.dispatch" reference-fk="rel_client_product_fk_dispatch_id_fkey"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
+</dbmodel>
